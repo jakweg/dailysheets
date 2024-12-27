@@ -56,6 +56,11 @@ async function setRecords(range, values) {
 
 const app = express()
 app.use(express.json());
+app.use((req, res, next) => {
+    const token = req.header('authorization')?.split?.(' ')?.[1]
+    if (token !== process.env.TOKEN || !process.env.TOKEN) return res.sendStatus(401)
+    next()
+})
 app.listen(+process.env.PORT || 3000)
 
 app.get('/dates', async (req, res) => {
@@ -122,4 +127,3 @@ app.post('/push', async (req, res) => {
 
     res.setHeader('Content-Type', 'application/json').end(JSON.stringify({}))
 })
-//6825
