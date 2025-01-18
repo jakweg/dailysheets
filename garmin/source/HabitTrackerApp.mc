@@ -18,7 +18,7 @@ class HabitTrackerApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new HabitTrackerView(), new HabitTrackerDelegate() ];
+        return [ new Rez.Menus.MainMenu(), new HabitTrackerSettingsMenuDelegate() ];
     }
 
 }

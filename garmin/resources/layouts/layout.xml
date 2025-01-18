@@ -1,4 +1,103 @@
-<layout id="MainLayout">
-    <label x="center" y="5" text="@Strings.prompt" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-    <bitmap id="id_monkey" x="center" y="30" filename="../drawables/monkey.png" />
+<layout id="GoalReviewLayout">
+
+    <text-area
+        id="NumerLabel" x="0%" y="2%" font="Graphics.FONT_XTINY" width="100%" height="20%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <text-area
+        id="GoalCategory" x="0%" y="9%" font="Graphics.FONT_XTINY" width="100%" height="20%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER" />
+
+    <text-area
+        id="TitleLabel" x="10%" y="30%" width="80%" height="50%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER">
+
+        <fonts>
+            <font>Gfx.FONT_MEDIUM</font>
+            <font>Gfx.FONT_SMALL</font>
+            <font>Gfx.FONT_TINY</font>
+            <font>Gfx.FONT_XTINY</font>
+        </fonts>
+    </text-area>
+
+    <text-area
+        id="CurrentReview" x="0%" y="85%" font="Graphics.FONT_XTINY" width="100%" height="10%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER" />
+
+
+    <button x="2%" y="55%" width="18%" height="18%" behavior="onSelectScore_0">
+        <state id="stateDefault" color="Graphics.COLOR_RED" />
+        <state id="stateHighlighted" color="Graphics.COLOR_BLUE" />
+        <state id="stateSelected" color="Graphics.COLOR_GREEN" />
+        <state id="stateDisabled" color="Graphics.COLOR_BLACK" />
+    </button>
+    <text-area
+        x="2%" y="55%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="🤐" />
+
+
+    <button x="14%" y="70%" width="18%" height="18%" behavior="onSelectScore_1">
+        <state id="stateDefault" color="Graphics.COLOR_RED" />
+        <state id="stateHighlighted" color="Graphics.COLOR_BLUE" />
+        <state id="stateSelected" color="Graphics.COLOR_GREEN" />
+        <state id="stateDisabled" color="Graphics.COLOR_BLACK" />
+    </button>
+    <text-area
+        x="14%" y="70%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="🤮" />
+
+
+    <button x="32%" y="80%" width="18%" height="18%" behavior="onSelectScore_2">
+        <state id="stateDefault" color="Graphics.COLOR_RED" />
+        <state id="stateHighlighted" color="Graphics.COLOR_BLUE" />
+        <state id="stateSelected" color="Graphics.COLOR_GREEN" />
+        <state id="stateDisabled" color="Graphics.COLOR_BLACK" />
+    </button>
+    <text-area
+        x="32%" y="80%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="😞" />
+
+
+    <button x="50%" y="80%" width="18%" height="18%" behavior="onSelectScore_3">
+        <state id="stateDefault" color="Graphics.COLOR_RED" />
+        <state id="stateHighlighted" color="Graphics.COLOR_BLUE" />
+        <state id="stateSelected" color="Graphics.COLOR_GREEN" />
+        <state id="stateDisabled" color="Graphics.COLOR_BLACK" />
+    </button>
+    <text-area
+        x="50%" y="80%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="😐" />
+
+    <button x="68%" y="70%" width="18%" height="18%" behavior="onSelectScore_4">
+        <state id="stateDefault" color="Graphics.COLOR_RED" />
+        <state id="stateHighlighted" color="Graphics.COLOR_BLUE" />
+        <state id="stateSelected" color="Graphics.COLOR_GREEN" />
+        <state id="stateDisabled" color="Graphics.COLOR_BLACK" />
+    </button>
+    <text-area
+        x="68%" y="70%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="🙂" />
+
+
+    <button x="80%" y="55%" width="18%" height="18%" behavior="onSelectScore_5">
+        <state id="stateDefault" color="Graphics.COLOR_RED" />
+        <state id="stateHighlighted" color="Graphics.COLOR_BLUE" />
+        <state id="stateSelected" color="Graphics.COLOR_GREEN" />
+        <state id="stateDisabled" color="Graphics.COLOR_BLACK" />
+    </button>
+    <text-area
+        x="80%" y="55%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="🥳" />
+
+
+    <!-- <bitmap id="rightTopHint"
+        personality="
+            system_icon_light__hint_button_right_top
+            system_loc__hint_button_right_top" /> -->
+
 </layout>
