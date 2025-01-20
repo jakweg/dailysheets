@@ -24,73 +24,73 @@
         justification="Graphics.TEXT_JUSTIFY_CENTER" />
 
 
-    <button x="2%" y="55%" width="18%" height="18%" behavior="onSelectScore_0">
+    <button x="2%" y="50%" width="20%" height="20%" behavior="onSelectScore_0">
         <state id="stateDefault" color="Graphics.COLOR_TRANSPARENT" />
         <state id="stateHighlighted" color="Graphics.COLOR_DK_GRAY" />
         <state id="stateSelected" color="Graphics.COLOR_GREEN" />
     </button>
     <text-area
         id="emoji0"
-        x="2%" y="55%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        x="2%" y="50%" font="Graphics.FONT_LARGE" width="20%" height="20%"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         text="🤐" />
 
 
-    <button x="14%" y="70%" width="18%" height="18%" behavior="onSelectScore_1">
+    <button x="12%" y="68%" width="20%" height="20%" behavior="onSelectScore_1">
         <state id="stateDefault" color="Graphics.COLOR_TRANSPARENT" />
         <state id="stateHighlighted" color="Graphics.COLOR_DK_GRAY" />
         <state id="stateSelected" color="Graphics.COLOR_GREEN" />
     </button>
     <text-area
         id="emoji1"
-        x="14%" y="70%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        x="12%" y="68%" font="Graphics.FONT_LARGE" width="20%" height="20%"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         text="🤮" />
 
 
-    <button x="32%" y="80%" width="18%" height="18%" behavior="onSelectScore_2">
+    <button x="30%" y="80%" width="20%" height="20%" behavior="onSelectScore_2">
         <state id="stateDefault" color="Graphics.COLOR_TRANSPARENT" />
         <state id="stateHighlighted" color="Graphics.COLOR_DK_GRAY" />
         <state id="stateSelected" color="Graphics.COLOR_GREEN" />
     </button>
     <text-area
         id="emoji2"
-        x="32%" y="80%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        x="30%" y="80%" font="Graphics.FONT_LARGE" width="20%" height="20%"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         text="😞" />
 
 
-    <button x="50%" y="80%" width="18%" height="18%" behavior="onSelectScore_3">
+    <button x="50%" y="80%" width="20%" height="20%" behavior="onSelectScore_3">
         <state id="stateDefault" color="Graphics.COLOR_TRANSPARENT" />
         <state id="stateHighlighted" color="Graphics.COLOR_DK_GRAY" />
         <state id="stateSelected" color="Graphics.COLOR_GREEN" />
     </button>
     <text-area
         id="emoji3"
-        x="50%" y="80%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        x="50%" y="80%" font="Graphics.FONT_LARGE" width="20%" height="20%"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         text="😐" />
 
-    <button x="68%" y="70%" width="18%" height="18%" behavior="onSelectScore_4">
+    <button x="70%" y="68%" width="20%" height="20%" behavior="onSelectScore_4">
         <state id="stateDefault" color="Graphics.COLOR_TRANSPARENT" />
         <state id="stateHighlighted" color="Graphics.COLOR_DK_GRAY" />
         <state id="stateSelected" color="Graphics.COLOR_GREEN" />
     </button>
     <text-area
         id="emoji4"
-        x="68%" y="70%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        x="70%" y="68%" font="Graphics.FONT_LARGE" width="20%" height="20%"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         text="🙂" />
 
 
-    <button x="80%" y="55%" width="18%" height="18%" behavior="onSelectScore_5">
+    <button x="80%" y="50%" width="20%" height="20%" behavior="onSelectScore_5">
         <state id="stateDefault" color="Graphics.COLOR_TRANSPARENT" />
         <state id="stateHighlighted" color="Graphics.COLOR_DK_GRAY" />
         <state id="stateSelected" color="Graphics.COLOR_GREEN" />
     </button>
     <text-area
         id="emoji5"
-        x="80%" y="55%" font="Graphics.FONT_LARGE" width="18%" height="18%"
+        x="80%" y="50%" font="Graphics.FONT_LARGE" width="20%" height="20%"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         text="🥳" />
 

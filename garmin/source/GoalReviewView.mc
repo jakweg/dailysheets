@@ -242,18 +242,14 @@ class MyViewLoopFactory extends WatchUi.ViewLoopFactory {
 
         var aliveLoop = loop.get();
         if (aliveLoop != null) {
-            try {
-                aliveLoop.changeView(WatchUi.ViewLoop.DIRECTION_NEXT);
-            } catch(e) {
-                // ignore
-            }
+            aliveLoop.changeView(WatchUi.ViewLoop.DIRECTION_NEXT);
         }
     }
 
     function moveToNextPage(isKeysMode) {
         mIsKeysMode = isKeysMode;
         var myTimer = new Timer.Timer();
-        myTimer.start(method(:timerCallback), 500, false);
+        myTimer.start(method(:timerCallback), 300, false);
     }
 
 }
