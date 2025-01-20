@@ -1,4 +1,4 @@
 <menu id="MainMenu">
-    <menu-item id="sync" label="Sync with server" />
     <menu-item id="review" label="Perform review" />
+    <menu-item id="sync" label="Sync with server" />
 </menu>

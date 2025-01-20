@@ -1,0 +1,15 @@
+<layout id="GoalReviewInitialLayout">
+
+    <text-area
+        id="TitleLabel" x="10%" y="40%" width="80%" height="50%"
+        justification="Graphics.TEXT_JUSTIFY_CENTER">
+
+        <fonts>
+            <font>Gfx.FONT_MEDIUM</font>
+            <font>Gfx.FONT_SMALL</font>
+            <font>Gfx.FONT_TINY</font>
+            <font>Gfx.FONT_XTINY</font>
+        </fonts>
+    </text-area>
+
+</layout>
