@@ -4,13 +4,19 @@ import Toybox.WatchUi;
 
 class FullSyncDelegate extends WatchUi.InputDelegate {
 
+    hidden var mStorage as ReviewStorage;
     hidden var mView;
-    function initialize() {
+
+    hidden var mDatesToSet;
+
+    function initialize(storage) {
         InputDelegate.initialize();
+        mStorage = storage;
         mView = new WatchUi.ProgressBar(
-            "Syncing...",
+            "Syncing",
             null
         );
+        mDatesToSet = null;
     }
 
     function getView() {
@@ -21,12 +27,12 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
     }
 
     function start() {
-        var reviewsGivenObject = (Application.Storage.getValue("reviews-given") as Dictionary<String, Array<Number>>);
+        var reviewsGivenObject = mStorage.getRawPendingReviewsObject();
         if (reviewsGivenObject == null) {
             reviewsGivenObject = {};
         }
 
-        var goals = Application.Storage.getValue("goals");
+        var goals = mStorage.getGoalsArray();
         if (goals == null) {
             goals = [];
         }
@@ -41,8 +47,6 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
             return;
         }
 
-        Application.Storage.deleteValue("reviews-given");
-
         new ApiCall(method(:mOnDaysLoaded)).getDays();
     }
 
@@ -53,7 +57,7 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
             return;
         }
 
-        Application.Storage.setValue("dates", data);
+        mDatesToSet = data;
 
         new ApiCall(method(:mOnGoalsLoaded)).getGoals();
     }
@@ -65,7 +69,8 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
             return;
         }
 
-        Application.Storage.setValue("goals", data);
+        mStorage.commitSyncDone(mDatesToSet, data);
+        mStorage.saveToDeviceMemory();
 
         WatchUi.showToast("Synced successfully", {:icon=>Rez.Drawables.positiveToastIcon});
         WatchUi.popView(WatchUi.SLIDE_BLINK);

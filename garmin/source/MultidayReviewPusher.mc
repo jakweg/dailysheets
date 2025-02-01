@@ -9,7 +9,7 @@ class MultidayReviewPusher {
     hidden var mLeftKeys;
     hidden var mGoalTexts as Array<String>;
 
-    function initialize(callback as Method, entireObject, goalTexts as Dictionary<String, Array<Array<String>>>) {
+    function initialize(callback as Method, entireObject, goalTexts as Array<Array>) {
         mCallback = callback;
         mEntireObject = entireObject;
         if (entireObject == null || mEntireObject.keys().size() == 0) {
@@ -18,9 +18,9 @@ class MultidayReviewPusher {
             return;
         }
         mLeftKeys = mEntireObject.keys();
-        mGoalTexts = new [goalTexts["goals"].size()];
-        for (var i = 0;i < goalTexts["goals"].size(); i++) {
-            mGoalTexts[i] = goalTexts["goals"][i][1];
+        mGoalTexts = new [goalTexts.size()];
+        for (var i = 0;i < goalTexts.size(); i++) {
+            mGoalTexts[i] = goalTexts[i][1];
         }
     }
 

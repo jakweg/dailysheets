@@ -32,13 +32,15 @@ class GoalReviewFinalView extends WatchUi.View {
 }
 
 class FinalViewDelegate extends WatchUi.BehaviorDelegate {
-    function initialize() {
+    hidden var mStorage as ReviewStorage;
+    function initialize(storage) {
         BehaviorDelegate.initialize();
+        mStorage = storage;
     }
 
     function onSelect() {
         WatchUi.popView(WatchUi.SLIDE_LEFT);
-        var delegate = new FullSyncDelegate();
+        var delegate = new FullSyncDelegate(mStorage);
         WatchUi.pushView(
             delegate.getView(),
             delegate,
@@ -56,6 +58,7 @@ class GoalReviewDelegate extends WatchUi.BehaviorDelegate {
     hidden var mGoalsSize;
     hidden var mOnReviewSelected;
     hidden var mReviewGiven;
+
     function initialize(view, onReviewSelected, day, goalIndex, goalsSize) {
         BehaviorDelegate.initialize();
         mView = view.weak();
@@ -69,26 +72,9 @@ class GoalReviewDelegate extends WatchUi.BehaviorDelegate {
     function onReviewGiven(value) {
         if (mReviewGiven) { return; }
         mReviewGiven = true;
-        var reviewsGivenObject = (Application.Storage.getValue("reviews-given") as Dictionary<String, Array<Number>>);
-        if (reviewsGivenObject == null) {
-            reviewsGivenObject = {};
-        }
-
-        var forThisDay = reviewsGivenObject[mDay];
-        if (forThisDay == null) {
-            forThisDay = new [mGoalsSize];
-            for (var i = 0;i < mGoalsSize; i++) {
-                forThisDay[i] = -1;
-            }
-            reviewsGivenObject[mDay] = forThisDay;
-        }
-
-        forThisDay[mGoalIndex] = value;
-
-        Application.Storage.setValue("reviews-given", reviewsGivenObject);
 
         mView.get().onReviewGiven(value);
-        mOnReviewSelected.invoke(mView.get().isKeysMode);
+        mOnReviewSelected.invoke(value, mGoalIndex, mView.get().isKeysMode);
     }
 
     function onSelectScore_0() {
@@ -110,9 +96,13 @@ class GoalReviewDelegate extends WatchUi.BehaviorDelegate {
         onReviewGiven(5);
     }
 
-    function onSelect() {
-        if (mView.get().isKeysMode)
-            { return false; }
+    function onKey(keyEvent) {
+        if (keyEvent.getKey() != WatchUi.KEY_ENTER) {
+            return false;
+        }
+        if (mView.get().isKeysMode) {
+            return false;
+        }
         mView.get().onSelect();
         return true;
     }
@@ -138,14 +128,16 @@ class GoalReviewView extends WatchUi.View {
     hidden var mGoalTitle;
     hidden var mGoalCategory;
     hidden var mGoalIndex;
+    hidden var mCurrentReview;
     hidden var mTotalGoals;
 
-    function initialize(goalTitle, goalCategory, goalIndex, totalGoals, isKeysMode_) {
+    function initialize(goalTitle, goalCategory, goalIndex, totalGoals, currentReview, isKeysMode_) {
         View.initialize();
         isKeysMode = isKeysMode_;
         mGoalTitle = goalTitle;
         mGoalCategory = goalCategory;
         mGoalIndex = goalIndex;
+        mCurrentReview = currentReview;
         mTotalGoals = totalGoals;
     }
 
@@ -165,6 +157,17 @@ class GoalReviewView extends WatchUi.View {
         (findDrawableById("TitleLabel") as Text).setText(mGoalTitle);
         (findDrawableById("NumerLabel") as Text).setText("" + (mGoalIndex + 1) + "/" + mTotalGoals);
         (findDrawableById("GoalCategory") as Text).setText(mGoalCategory);
+        if (mCurrentReview != -1) {
+            var emojis = [
+                "🤐",
+                "🤮",
+                "😞",
+                "😐",
+                "🙂",
+                "🥳"
+            ];
+            (findDrawableById("CurrentReview") as Text).setText(emojis[mCurrentReview]);
+        }
     }
 
     public function onSelect() {
@@ -197,44 +200,46 @@ class GoalReviewView extends WatchUi.View {
 }
 
 class MyViewLoopFactory extends WatchUi.ViewLoopFactory {
+    hidden var mStorage as ReviewStorage;
     hidden var mDay;
-    hidden var mGoalsArray;
-    hidden var mCategoriesArray;
     hidden var mIsKeysMode;
 
     public var loop;
 
-    function initialize(day, goalsArray, categoriesArray) {
+    function initialize(day, storage) {
         ViewLoopFactory.initialize();
+        mStorage = storage;
         mDay = day;
-        mGoalsArray = goalsArray;
-        mCategoriesArray = categoriesArray;
         mIsKeysMode = false;
     }
 
 
     function getSize() as Lang.Number {
-        return mGoalsArray.size() + 2;
+        return mStorage.getGoalsArray().size() + 2;
     }
 
     function getView(page as Lang.Number) as [ WatchUi.View ] or [ WatchUi.View, WatchUi.BehaviorDelegate ] {
-        var size = mGoalsArray.size();
         if (page == 0) {
             var dialog = new GoalReviewInitialView(mDay);
             return [dialog, new WatchUi.BehaviorDelegate()];
         }
         page--;
 
+        var goals = mStorage.getGoalsArray();
+        var size = goals.size();
+
         if (page == size) {
             var dialog = new GoalReviewFinalView();
-            return [dialog, new FinalViewDelegate()];
+            return [dialog, new FinalViewDelegate(mStorage)];
         }
 
-        var goalTitle = mGoalsArray[page][1];
-        var goalCategory = mCategoriesArray[mGoalsArray[page][0]];
+        var goalTitle = goals[page][1];
+        var goalCategory = mStorage.getCategoryByIndex(goals[page][0]);
 
-        var view = new GoalReviewView(goalTitle, goalCategory, page, size, mIsKeysMode);
-        var delegate = new GoalReviewDelegate(view, method(:moveToNextPage), mDay, page, size);
+        var currentReview = mStorage.getReviewValue(mDay, page);
+
+        var view = new GoalReviewView(goalTitle, goalCategory, page, size, currentReview, mIsKeysMode);
+        var delegate = new GoalReviewDelegate(view, method(:onReviewGiven), mDay, page, size);
         return [view, delegate];
     }
 
@@ -246,7 +251,10 @@ class MyViewLoopFactory extends WatchUi.ViewLoopFactory {
         }
     }
 
-    function moveToNextPage(isKeysMode) {
+    function onReviewGiven(value, goalIndex, isKeysMode) {
+
+        mStorage.giveReview(mDay, goalIndex, value);
+
         mIsKeysMode = isKeysMode;
         var myTimer = new Timer.Timer();
         myTimer.start(method(:timerCallback), 300, false);
@@ -269,25 +277,8 @@ class MyViewLoopDelegate extends WatchUi.ViewLoopDelegate {
     }
 }
 
-function openGoalReview(day as String, goalsArray, categoriesArray) {
-    if (goalsArray == null) {
-        var tmp = (Application.Storage.getValue("goals") as Dictionary<String, String>);
-        if (tmp == null) {
-            var delegate = new FullSyncDelegate();
-            WatchUi.pushView(
-                delegate.getView(),
-                delegate,
-                WatchUi.SLIDE_LEFT
-            );
-            delegate.start();
-            return;
-        }
-
-        goalsArray = tmp["goals"];
-        categoriesArray = tmp["categories"];
-    }
-
-    var factory = new MyViewLoopFactory(day, goalsArray, categoriesArray);
+function openGoalReview(day as String, storage as ReviewStorage) {
+    var factory = new MyViewLoopFactory(day, storage);
     var loop = new WatchUi.ViewLoop(factory, { :wrap => false });
     factory.loop = loop.weak();
     WatchUi.pushView(loop, new MyViewLoopDelegate(loop), 

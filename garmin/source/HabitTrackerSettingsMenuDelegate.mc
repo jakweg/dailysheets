@@ -4,13 +4,15 @@ import Toybox.WatchUi;
 
 class HabitTrackerSettingsMenuDelegate extends WatchUi.MenuInputDelegate {
 
-    function initialize() {
+    hidden var mStorage as ReviewStorage;
+    function initialize(storage) {
         MenuInputDelegate.initialize();
+        mStorage = storage;
     }
 
     function onMenuItem(item as Symbol) as Void {
         if (item == :sync) {
-            var delegate = new FullSyncDelegate();
+            var delegate = new FullSyncDelegate(mStorage);
             WatchUi.pushView(
                 delegate.getView(),
                 delegate,
@@ -18,7 +20,7 @@ class HabitTrackerSettingsMenuDelegate extends WatchUi.MenuInputDelegate {
             );
             delegate.start();
         } else if (item == :review) {
-            var delegate = new ChooseDateForReviewDelegate();
+            var delegate = new ChooseDateForReviewDelegate(mStorage);
             WatchUi.pushView(
                 delegate.getView(),
                 delegate,

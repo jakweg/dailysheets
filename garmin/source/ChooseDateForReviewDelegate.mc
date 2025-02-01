@@ -4,24 +4,25 @@ import Toybox.WatchUi;
 
 class ChooseDateForReviewDelegate extends WatchUi.Menu2InputDelegate {
 
+    hidden var mStorage as ReviewStorage;
     hidden var mView;
-    function initialize() {
+    function initialize(storage) {
         Menu2InputDelegate.initialize();
-
-        var datesObject = Application.Storage.getValue("dates") as Dictionary<String, String>;
+        mStorage = storage;
 
         mView = new WatchUi.Menu2({
             :title => "Choose day",
-            :focus => datesObject["suggestedToday"] as Number
+            :focus => mStorage.getSuggestedDateIndex()
         });
 
-        var datesList = datesObject["dates"] as Array<String>;
+        var datesList = mStorage.getReviewAvailableDaysList();
         for( var i = 0; i < datesList.size(); i++ ) {
+            var value = datesList[i];
             mView.addItem(
                 new WatchUi.MenuItem(
-                    datesList[i],
+                    value,
                     null,
-                    datesList[i],
+                    value,
                     {}
                 )
             );
@@ -33,7 +34,7 @@ class ChooseDateForReviewDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     function onSelect(item as WatchUi.MenuItem) as Void {
-        openGoalReview(item.getId() as String, null, null);
+        openGoalReview(item.getId() as String, mStorage);
     }
 
 }
