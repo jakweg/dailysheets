@@ -1,0 +1,8 @@
+<strings>
+    <string id="AppName">Codzienne Cele</string>
+    <string id="ChooseDay">Wybierz dzień</string>
+    <string id="Syncing">Synchronizowanie</string>
+    <string id="SyncFailed">Nie udało się zsynchronizować</string>
+    <string id="SyncOk">Pomyślnie zsynchronizowano</string>
+    <string id="AllDone">Wszystko gotowe! Można synchronizować</string>
+</strings>

@@ -11,7 +11,7 @@ class ChooseDateForReviewDelegate extends WatchUi.Menu2InputDelegate {
         mStorage = storage;
 
         mView = new WatchUi.Menu2({
-            :title => "Choose day",
+            :title => Rez.Strings.ChooseDay,
             :focus => mStorage.getSuggestedDateIndex()
         });
 

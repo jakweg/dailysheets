@@ -1,0 +1,4 @@
+<menu id="MainMenu">
+    <menu-item id="review" label="Przeprowadź ocenę dnia" />
+    <menu-item id="sync" label="Synchronizuj z serwerem" />
+</menu>

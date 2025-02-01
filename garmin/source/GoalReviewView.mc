@@ -27,7 +27,7 @@ class GoalReviewFinalView extends WatchUi.View {
     public function onLayout( dc ) as Void {
         setLayout( Rez.Layouts.GoalReviewInitialLayout( dc ) );
 
-        (findDrawableById("TitleLabel") as Text).setText("All done! Ready to sync");
+        (findDrawableById("TitleLabel") as Text).setText(Rez.Strings.AllDone);
     }
 }
 

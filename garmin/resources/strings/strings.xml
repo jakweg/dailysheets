@@ -1,4 +1,8 @@
 <strings>
     <string id="AppName">Daily Sheets</string>
-
+    <string id="ChooseDay">Choose day</string>
+    <string id="Syncing">Syncing</string>
+    <string id="SyncFailed">Failed to sync</string>
+    <string id="SyncOk">Synced successfully</string>
+    <string id="AllDone">All done! Ready to sync</string>
 </strings>

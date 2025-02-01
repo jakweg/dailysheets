@@ -13,7 +13,7 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
         InputDelegate.initialize();
         mStorage = storage;
         mView = new WatchUi.ProgressBar(
-            "Syncing",
+            loadResource(Rez.Strings.Syncing),
             null
         );
         mDatesToSet = null;
@@ -42,7 +42,7 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
 
     function mOnCurrentReviewsPushed(ok, data) as Void {
         if (!ok) {
-            WatchUi.showToast("Failed to sync", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.SyncFailed, {:icon=>Rez.Drawables.warningToastIcon});
             WatchUi.popView(WatchUi.SLIDE_BLINK);
             return;
         }
@@ -52,7 +52,7 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
 
     function mOnDaysLoaded(ok, data) as Void {
         if (!ok) {
-            WatchUi.showToast("Failed to sync", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.SyncFailed, {:icon=>Rez.Drawables.warningToastIcon});
             WatchUi.popView(WatchUi.SLIDE_BLINK);
             return;
         }
@@ -64,7 +64,7 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
 
     function mOnGoalsLoaded(ok, data) as Void {
         if (!ok) {
-            WatchUi.showToast("Failed to sync", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.SyncFailed, {:icon=>Rez.Drawables.warningToastIcon});
             WatchUi.popView(WatchUi.SLIDE_BLINK);
             return;
         }
@@ -72,7 +72,7 @@ class FullSyncDelegate extends WatchUi.InputDelegate {
         mStorage.commitSyncDone(mDatesToSet, data);
         mStorage.saveToDeviceMemory();
 
-        WatchUi.showToast("Synced successfully", {:icon=>Rez.Drawables.positiveToastIcon});
+        WatchUi.showToast(Rez.Strings.SyncOk, {:icon=>Rez.Drawables.positiveToastIcon});
         WatchUi.popView(WatchUi.SLIDE_BLINK);
     }
 }
