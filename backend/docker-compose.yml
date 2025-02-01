@@ -5,6 +5,7 @@ services:
     environment:
       - PORT=3000
       - TOKEN=$TOKEN
+      - SHEET_ID=$SHEET_ID
     build:
       context: .
       dockerfile: Dockerfile
