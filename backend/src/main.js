@@ -1,10 +1,11 @@
-const spreadsheetId = '1jxgpsM2LqDefK6xTGO3Ttiu2qNwun5Kenud2ie8NQEY'
 import { google } from 'googleapis'
 import express from 'express'
 import * as fs from 'fs/promises'
 
 const DATA_START_COLUMN = 'E'
 const RESULT_DESCRIPTION_COLUMN = 'A'
+
+const spreadsheetId = process.env.SHEET_ID;
 
 const keys = JSON.parse(await fs.readFile('./account.key.json', {encoding: 'utf-8'}))
 const scopes = ["https://www.googleapis.com/auth/spreadsheets"]

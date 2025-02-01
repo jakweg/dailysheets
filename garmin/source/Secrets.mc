@@ -1,5 +1,9 @@
 import Toybox.Lang;
 
 function getAPITokenString() as String {
-    return "set token here";
+    return "abcdef";
+}
+
+function getApiEndpointRoot() as String {
+    return "https://example.com/";
 }

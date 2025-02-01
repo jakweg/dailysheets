@@ -21,7 +21,7 @@ class ApiCall {
     }
 
     hidden function makeRequest(endpoint as String, params) as Void {
-        var url = "https://habittracker.wegrzyn.dev/" + endpoint;                        
+        var url = getApiEndpointRoot() + endpoint;                        
 
         var options = {                                            
             :method => params == null ? Communications.HTTP_REQUEST_METHOD_GET : Communications.HTTP_REQUEST_METHOD_POST,     
