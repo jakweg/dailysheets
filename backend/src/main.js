@@ -72,7 +72,7 @@ app.get('/dates', async (req, res) => {
     const [year, month, day] = startDateRecord
       .split("-")
       .map((e) => parseInt(e, 10));
-    const startDate = new Date(year, month - 1, day);
+    const startDate = new Date(year, month - 1, day + 1);
     const nowDate = new Date();
     const suggestedToday = (nowDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000) | 0
 
