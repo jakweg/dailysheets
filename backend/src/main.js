@@ -4,6 +4,7 @@ import * as fs from 'fs/promises'
 
 const DATA_START_COLUMN = 'E'
 const RESULT_DESCRIPTION_COLUMN = 'A'
+const START_DATE_COLUMN = 'D1'
 
 const spreadsheetId = process.env.SHEET_ID;
 
@@ -67,7 +68,11 @@ app.listen(+process.env.PORT || 3000)
 app.get('/dates', async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     const dates = (await getRecords(`${DATA_START_COLUMN}1:1`))[0]
-    const startDate = new Date(2024, 11, 1)
+    const startDateRecord = (await getRecords(`${START_DATE_COLUMN}:${START_DATE_COLUMN}`))[0][0];
+    const [year, month, day] = startDateRecord
+      .split("-")
+      .map((e) => parseInt(e, 10));
+    const startDate = new Date(year, month - 1, day);
     const nowDate = new Date();
     const suggestedToday = (nowDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000) | 0
 
